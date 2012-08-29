@@ -5,18 +5,8 @@
  * Version: 0.1
  * Author: Fabio Comuni <http://kirgroup.com/profile/fabrixxm>
  * 
- * 
- * 
- *
- * Addons are registered with the system through the admin
- * panel.
- *
- * When registration is detected, the system calls the plugin
- * name_install() function, located in 'addon/name/name.php',
- * where 'name' is the name of the addon.
- * If the addon is removed from the configuration list, the 
- * system will call the name_uninstall() function.
- *
+ * # DOCS
+ * https://github.com/mozilla/id-specs/blob/prod/browserid/index.md
  */
 
 
@@ -68,18 +58,10 @@ function browserid_provider_createkey(){
  */
 function browserid_provider_well_known(&$a, $b) {
 
-    $sitekeys = get_config('browserid', 'keys');
-    if ($sitekeys===False) $sitekeys = browserid_provider_createkey();
-    $rsa = $sitekeys['details']['rsa'];
- 
-    
-
-    
- #   echo "<pre>"; var_dump($privkey, $kinfo, base64_encode($kinfo['rsa']['n']));
-    
-    
-
     if ($a->argc > 1 && $a->argv[1]==="browserid") {
+        $sitekeys = get_config('browserid', 'keys');
+        if ($sitekeys===False) $sitekeys = browserid_provider_createkey();
+        $rsa = $sitekeys['details']['rsa'];
         echo json_encode(array(
             "public-key" => array(
                 "algorithm" => "RS",
@@ -92,3 +74,37 @@ function browserid_provider_well_known(&$a, $b) {
         killme();
     }
 }
+
+
+/**
+* Module
+*/
+function browserid_provider_module(){}
+
+function browserid_provider_content(&$a){
+    $o = ""; 
+    if ($a->argc > 1){
+        
+        switch($a->argv[1]) {
+            case "sign_in.html":
+                $o = browserid_provider_signin($a);
+                break;
+            
+            case "provision.html":
+                $o = browserid_provider_provision($a);
+                break;
+            
+        }
+    
+    }
+    return $o;
+}
+
+
+function browserid_provider_signin(&$a) {
+    return "signin form";
+}
+
+function browserid_provider_provision(&$a) {
+}
+

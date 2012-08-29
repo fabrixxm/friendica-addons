@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://login.persona.org/include.js"></script>
+
+
+</head>
+<body>
+    <a id="signin" href="#">signin</a> - <a id="signout" href="#">signout</a>
+</body>
+
+    <script>
+
+    var signinLink = document.getElementById('signin');
+    if (signinLink) {
+      signinLink.onclick = function(e) { navigator.id.request(); return false; };
+    };
+     
+    var signoutLink = document.getElementById('signout');
+    if (signoutLink) {
+      signoutLink.onclick = function(e) { navigator.id.logout(); return false;};
+    };
+
+    </script>
+
+</html>
