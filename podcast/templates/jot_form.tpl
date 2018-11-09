@@ -1,20 +1,20 @@
 </li></ul><br>
-<div class="panel panel-default podcast">
+<div class="panel panel-default podcast" data-controller="podcast">
 	<div class="panel-heading"><i class="fa fa-podcast" aria-hidden="true"></i>	Podcast</div>
 	<div class="panel-body form-horizontal">
 		{{foreach $formats as $id=>$format}}
 			<p class="text-muted">{{$format.label}} ({{$format.mime}})</p>
-			<input type="hidden" name="podcast-{{$id}}-mime" id="podcast-{{$id}}-mime" value="{{$format.mime}}">
+			<input type="hidden" name="podcast-{{$id}}-mime" id="podcast-{{$id}}-mime" value="{{$format.mime}}" data-target="podcast.mime">
 			<div class="form-group">
 				<label for="podcast-{{$id}}-url" class="col-sm-2 control-label">URL</label>
 				<div class="col-sm-10">
-					<input class="form-control" name="podcast-{{$id}}-url" id="podcast-{{$id}}-url" placeholder="">
+					<input class="form-control" name="podcast-{{$id}}-url" id="podcast-{{$id}}-url" placeholder="" data-target="podcast.url" data-action="blur->podcast#fetchlen">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="podcast-{{$id}}-length" class="col-sm-2 control-label">Length</label>
 				<div class="col-sm-10">
-					<input type="number" class="form-control" name="podcast-{{$id}}-length" id="podcast-{{$id}}-length" placeholder="in bytes">
+					<input type="number" class="form-control" name="podcast-{{$id}}-length" id="podcast-{{$id}}-length" placeholder="in bytes" data-target="podcast.length">
 				</div>
 			</div>
 		{{/foreach}}

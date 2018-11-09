@@ -36,8 +36,8 @@ function podcast_jot_tool(&$a,&$html) {
 	// add css and js
 	$baseurl = $a->getBaseURL()."/addon/podcast";
 	$a->page['htmlhead'] .= '<link rel="stylesheet"  type="text/css" href="'. $baseurl .'/podcast.css" media="all" />' . "\r\n";
-	/*$a->page['htmlhead'] .= '<script src="'. $baseurl .'/stimulus.umd.js"></script>'. "\r\n";
-	$a->page['htmlhead'] .= '<script src="'. $baseurl .'/podcast.js"></script>'. "\r\n";*/
+	$a->page['htmlhead'] .= '<script src="'. $baseurl .'/stimulus.umd.js"></script>'. "\r\n";
+	$a->page['htmlhead'] .= '<script src="'. $baseurl .'/podcast.js"></script>'. "\r\n";
 
 	$tpl = Renderer::getMarkupTemplate('jot_form.tpl', 'addon/podcast/');
 
